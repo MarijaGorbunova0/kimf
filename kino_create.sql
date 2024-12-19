@@ -4,7 +4,7 @@
 -- tables
 -- Table: Konto
 CREATE TABLE Konto (
-    id int  NOT NULL,
+    id int identity(1,1) NOT NULL,
     kasutajanimi varchar(50)  NOT NULL,
     email int  NOT NULL,
     parool int  NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE Konto (
 
 -- Table: Piletid
 CREATE TABLE Piletid (
-    id int  NOT NULL,
+    id int identity(1,1) NOT NULL,
     Seanssid_id int  NOT NULL,
     Konto_id int  NOT NULL,
     kohad_id int  NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE Piletid (
 
 -- Table: Saalid
 CREATE TABLE Saalid (
-    id int  NOT NULL,
+    id int identity(1,1) NOT NULL,
     Nimetus int  NOT NULL,
     Tuup int  NOT NULL,
     CONSTRAINT Saalid_pk PRIMARY KEY (id)
@@ -30,8 +30,8 @@ CREATE TABLE Saalid (
 
 -- Table: Seanssid
 CREATE TABLE Seanssid (
-    id int  NOT NULL,
-    aeg time  NOT NULL,
+    id int identity(1,1) NOT NULL,
+    SeanssiDate date  NOT NULL,
     keel varchar(50)  NOT NULL,
     Saalid_id int  NOT NULL,
     film_id int  NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE Seanssid (
 
 -- Table: film
 CREATE TABLE film (
-    id int  NOT NULL,
+    id int identity(1,1) NOT NULL,
     nimi varchar(50)  NOT NULL,
     poster varbinary(MAX)  NOT NULL,
     aasta date  NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE film (
 
 -- Table: kohad
 CREATE TABLE kohad (
-    id int  NOT NULL,
+    id int identity(1,1) NOT NULL,
     rida int  NOT NULL,
     koha_number int  NOT NULL,
     Saalid_id int  NOT NULL,
@@ -91,3 +91,42 @@ ADD CONSTRAINT kohad_Saalid FOREIGN KEY (Saalid_id)
 
 -- End of file.
 
+select * from kohad;
+INSERT INTO Saalid (Nimetus, Tuup)
+VALUES (1, 1);
+
+DECLARE @Saalid_id INT = 2;  
+DECLARE @status BIT = 1;  
+
+INSERT INTO kohad (rida, koha_number, Saalid_id, status)
+VALUES 
+(1, 1, @Saalid_id, @status),
+(1, 2, @Saalid_id, @status),
+(1, 3, @Saalid_id, @status),
+(1, 4, @Saalid_id, @status),
+(1, 5, @Saalid_id, @status),
+
+(2, 1, @Saalid_id, @status),
+(2, 2, @Saalid_id, @status),
+(2, 3, @Saalid_id, @status),
+(2, 4, @Saalid_id, @status),
+(2, 5, @Saalid_id, @status),
+
+(3, 1, @Saalid_id, @status),
+(3, 2, @Saalid_id, @status),
+(3, 3, @Saalid_id, @status),
+(3, 4, @Saalid_id, @status),
+(3, 5, @Saalid_id, @status),
+
+(4, 1, @Saalid_id, @status),
+(4, 2, @Saalid_id, @status),
+(4, 3, @Saalid_id, @status),
+(4, 4, @Saalid_id, @status),
+(4, 5, @Saalid_id, @status),
+
+(5, 1, @Saalid_id, @status),
+(5, 2, @Saalid_id, @status),
+(5, 3, @Saalid_id, @status),
+(5, 4, @Saalid_id, @status),
+(5, 5, @Saalid_id, @status);
+DELETE FROM kohad;
